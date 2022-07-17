@@ -7,7 +7,7 @@ class SimpleSin extends StatefulWidget {
 }
 
 class _SimpleSinState extends State<SimpleSin> {
-  final _pd = FlutterPd.instance;
+  final _pd = FlutterPd();
   PdFileHandle _pdFileHandle;
 
   final _assetPath = 'assets/simple_sin.pd';

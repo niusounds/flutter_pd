@@ -9,7 +9,7 @@ class MicrophoneMeter extends StatefulWidget {
 }
 
 class _MicrophoneMeterState extends State<MicrophoneMeter> {
-  final _pd = FlutterPd.instance;
+  final _pd = FlutterPd();
   PdFileHandle _pdFileHandle;
 
   final _assetPath = 'assets/microphone_level.pd';
