@@ -14,8 +14,7 @@ class FlutterPdPlugin : FlutterPlugin, ActivityAware {
 
     override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         val flutterPd = FlutterPd(
-            context = flutterPluginBinding.applicationContext,
-            assetPathResolver = flutterPluginBinding.asAssetPathResolver(),
+            flutterPluginBinding,
             pd = PdImpl(flutterPluginBinding.applicationContext)
         )
         connect(flutterPluginBinding.binaryMessenger, flutterPd)

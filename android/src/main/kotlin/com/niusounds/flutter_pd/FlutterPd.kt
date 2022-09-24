@@ -3,15 +3,16 @@ package com.niusounds.flutter_pd
 import android.content.Context
 import com.niusounds.flutter_pd.exception.PdException
 import com.niusounds.flutter_pd.util.RequestPermissionHandler
+import io.flutter.embedding.engine.plugins.FlutterPlugin.FlutterPluginBinding
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import java.io.File
 import java.io.IOException
 
 class FlutterPd(
-    private val context: Context,
-    private val assetPathResolver: AssetPathResolver,
-    private val pd: Pd
+    private val binding: FlutterPluginBinding,
+    private val pd: Pd,
 ) : DartToNative {
+    private val context: Context get() = binding.applicationContext
     var activityBinding: ActivityPluginBinding? = null
 
     fun dispose() {
@@ -56,7 +57,7 @@ class FlutterPd(
             val patchDir =
                 File(context.cacheDir, "flutter_pd").also { if (!it.exists()) it.mkdirs() }
             val tmpFile = File(patchDir, "tmp.pd")
-            context.assets.open(assetPathResolver.resolve(assetName)).use {
+            context.assets.open(binding.flutterAssets.getAssetFilePathByName(assetName)).use {
                 it.copyTo(tmpFile.outputStream())
             }
             return pd.openPatch(tmpFile)
