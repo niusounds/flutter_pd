@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_pd/flutter_pd.dart';
 import 'package:flutter_pd_example/fluttone.dart';
 
@@ -18,6 +19,13 @@ class _FluttonePdState extends State<FluttonePd> {
   @override
   void initState() {
     super.initState();
+
+    // Force landscape
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+
     _initializePd();
   }
 
@@ -35,13 +43,24 @@ class _FluttonePdState extends State<FluttonePd> {
   void dispose() {
     _pdFileHandle?.close();
     _pd.stopPd();
+
+    // Enable portrait
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
+
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return FluttoneUi(
-      onPlayNote: _onPlayNote,
+    return Theme(
+      data: ThemeData.dark(),
+      child: FluttoneUi(
+        onPlayNote: _onPlayNote,
+      ),
     );
   }
 
