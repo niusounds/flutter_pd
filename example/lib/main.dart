@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'fluttone.dart';
 import 'home_page.dart';
 import 'microphone_meter.dart';
 import 'simple_sin.dart';
@@ -16,6 +17,7 @@ class MyApp extends StatelessWidget {
         '/simple_sin': (_) => SimpleSin(),
         '/simple_sin_with_volume': (_) => SimpleSinWithVolume(),
         '/microphone_meter': (_) => MicrophoneMeter(),
+        '/fluttone': (_) => Fluttone(),
       },
     );
   }

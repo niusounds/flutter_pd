@@ -29,6 +29,11 @@ class _HomePageState extends State<HomePage> {
             title: Text('Microphone meter'),
             subtitle: Text('Demonstrates how to receive value from Pd.'),
           ),
+          ListTile(
+            onTap: _open('/fluttone'),
+            title: Text('Fluttone'),
+            subtitle: Text('Refined Flutter Contest app.'),
+          ),
         ],
       ),
     );
