@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_pd/flutter_pd.dart';
-import 'package:flutter_pd_example/fluttone.dart';
+
+import 'fluttone.dart';
 
 class FluttonePd extends StatefulWidget {
   const FluttonePd({

@@ -5,7 +5,7 @@ import 'package:flutter_pd/flutter_pd.dart';
 
 class MicrophoneMeter extends StatefulWidget {
   @override
-  _MicrophoneMeterState createState() => _MicrophoneMeterState();
+  State<MicrophoneMeter> createState() => _MicrophoneMeterState();
 }
 
 class _MicrophoneMeterState extends State<MicrophoneMeter> {
