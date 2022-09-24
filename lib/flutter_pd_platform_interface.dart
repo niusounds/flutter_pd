@@ -55,6 +55,10 @@ abstract class FlutterPdPlatform extends PlatformInterface {
     throw UnimplementedError('flutter_Pd::send() not implemented');
   }
 
+  Future<void> sendBang(String receiverName) {
+    throw UnimplementedError('flutter_Pd::sendBang() not implemented');
+  }
+
   Stream<PdEvent> receive(String symbol) {
     throw UnimplementedError('checkPermission() not implemented');
   }
