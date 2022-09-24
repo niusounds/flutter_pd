@@ -1,6 +1,5 @@
 package com.niusounds.flutter_pd
 
-import androidx.annotation.NonNull
 import com.niusounds.flutter_pd.impl.PdImpl
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
@@ -13,7 +12,7 @@ import io.flutter.plugin.common.MethodChannel
 class FlutterPdPlugin : FlutterPlugin, ActivityAware {
     private var flutterPd: FlutterPd? = null
 
-    override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
+    override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         val flutterPd = FlutterPd(
             context = flutterPluginBinding.applicationContext,
             assetPathResolver = flutterPluginBinding.asAssetPathResolver(),
@@ -31,7 +30,7 @@ class FlutterPdPlugin : FlutterPlugin, ActivityAware {
             .setStreamHandler(handler)
     }
 
-    override fun onDetachedFromEngine(@NonNull binding: FlutterPlugin.FlutterPluginBinding) {
+    override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
         flutterPd?.dispose()
         flutterPd = null
     }
