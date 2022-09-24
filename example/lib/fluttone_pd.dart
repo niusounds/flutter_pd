@@ -48,6 +48,6 @@ class _FluttonePdState extends State<FluttonePd> {
   // final notes = [62.0, 65.0, 69.0, 72.0, 74.0];
 
   void _onPlayNote(int note) {
-    _pd.send('note$note', 0.0);
+    _pd.sendBang('note$note');
   }
 }
