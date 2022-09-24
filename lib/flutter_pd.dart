@@ -6,6 +6,8 @@ export 'pd_event.dart';
 export 'pd_file_handle.dart';
 
 class FlutterPd {
+  const FlutterPd();
+
   /// Request a permission to access to microphone.
   Future<bool> checkPermission() async {
     return FlutterPdPlatform.instance.checkPermission();
