@@ -90,4 +90,12 @@ class FlutterPd(
 
         pd.send(receiver, value)
     }
+
+    override fun sendBang(receiver: String) {
+        if (pd.isRunning.not()) {
+            throw PdException("PdService is not started", "call start() first.")
+        }
+
+        pd.sendBang(receiver)
+    }
 }

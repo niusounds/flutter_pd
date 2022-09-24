@@ -18,6 +18,8 @@ interface DartToNative {
 
     fun send(receiver: String, value: Float)
 
+    fun sendBang(receiver: String)
+
     fun onListen(symbol: String, id: Int, callback: (Any) -> Unit)
 
     fun onCancel(symbol: String, id: Int)

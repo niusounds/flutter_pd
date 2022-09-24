@@ -38,6 +38,10 @@ class FlutterPd {
     return FlutterPdPlatform.instance.send(receiverName, value);
   }
 
+  Future<void> sendBang(String receiverName) {
+    return FlutterPdPlatform.instance.sendBang(receiverName);
+  }
+
   Stream<PdEvent> receive(String symbol) {
     return FlutterPdPlatform.instance.receive(symbol);
   }

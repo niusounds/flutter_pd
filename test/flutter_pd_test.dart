@@ -119,6 +119,19 @@ void main() {
     expect(calls[0].arguments, equals({'receiver': 'foo', 'value': 1.0}));
   });
 
+  test('sendBang', () async {
+    final List<MethodCall> calls = [];
+    channel.setMockMethodCallHandler((MethodCall call) async {
+      calls.add(call);
+    });
+
+    await pd.sendBang('hoge');
+
+    expect(calls.length, 1);
+    expect(calls[0].method, 'sendBang');
+    expect(calls[0].arguments, equals({'receiver': 'hoge'}));
+  });
+
   test('receive', () async {
     expect(pd.receive('foo'), isNotNull);
   });

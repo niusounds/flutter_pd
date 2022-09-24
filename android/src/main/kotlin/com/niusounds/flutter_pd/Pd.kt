@@ -54,6 +54,11 @@ interface Pd {
      */
     fun send(receiver: String, value: Float)
 
+    /**
+     * Send a bang to libpd.
+     */
+    fun sendBang(receiver: String)
+
     fun addListener(symbol: String, listener: PdListener)
 
     fun removeListener(symbol: String, listener: PdListener)

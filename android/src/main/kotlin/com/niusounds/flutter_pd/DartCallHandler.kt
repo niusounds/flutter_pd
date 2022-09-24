@@ -65,6 +65,14 @@ class DartCallHandler(
                     result.success(null)
                 }
 
+                "sendBang" -> {
+                    val receiver = call.argument<String>("receiver")
+                        ?: throw PdException("argument is missing", "receiver is required")
+
+                    sendBang(receiver)
+                    result.success(null)
+                }
+
                 else -> {
                     result.notImplemented()
                 }
