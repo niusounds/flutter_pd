@@ -2,18 +2,25 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-const name = 'Fluttone';
-const rows = 16;
-const cols = 5;
+class FluttoneUi extends StatefulWidget {
+  const FluttoneUi({
+    Key? key,
+    required this.onPlayNote,
+    this.name = 'Fluttone',
+    this.rows = 16,
+    this.cols = 5,
+  }) : super(key: key);
 
-// String assetForNote(int n) => 'sound/note$n.ogg';
+  final ValueChanged<int> onPlayNote;
+  final String name;
+  final int rows;
+  final int cols;
 
-class Fluttone extends StatefulWidget {
   @override
-  State<Fluttone> createState() => _FluttoneState();
+  State<FluttoneUi> createState() => _FluttoneUiState();
 }
 
-class _FluttoneState extends State<Fluttone>
+class _FluttoneUiState extends State<FluttoneUi>
     with SingleTickerProviderStateMixin {
   late List<List<bool>> _notes;
   late AnimationController _anim;
@@ -30,18 +37,18 @@ class _FluttoneState extends State<Fluttone>
     );
     _anim.addListener(() {
       setState(() {
-        _beat = (_anim.value * rows).floor();
+        _beat = (_anim.value * widget.rows).floor();
       });
     });
 
     _randomize();
   }
 
-  void _randomize() => _notes = List.generate(
-      rows, (i) => List.generate(cols, (i) => Random().nextInt(i + 2) < 1));
+  void _randomize() => _notes = List.generate(widget.rows,
+      (i) => List.generate(widget.cols, (i) => Random().nextInt(i + 2) < 1));
 
-  void _clear() =>
-      _notes = List.generate(rows, (i) => List.filled(cols, false));
+  void _clear() => _notes =
+      List.generate(widget.rows, (i) => List.filled(widget.cols, false));
 
   void _playPause() {
     if (_playing) {
@@ -62,7 +69,7 @@ class _FluttoneState extends State<Fluttone>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(name),
+        title: Text(widget.name),
         actions: <Widget>[
           IconButton(
             tooltip: 'Random',
@@ -88,51 +95,51 @@ class _FluttoneState extends State<Fluttone>
               reverse: true,
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 childAspectRatio: 4 / 5,
-                crossAxisCount: rows,
+                crossAxisCount: widget.rows,
                 crossAxisSpacing: 4,
                 mainAxisSpacing: 4,
               ),
-              itemCount: rows * cols,
+              itemCount: widget.rows * widget.cols,
               itemBuilder: _buildBox,
             ),
           ),
-          Bar(beat: _anim.value * rows),
+          Bar(
+            beat: _anim.value * widget.rows,
+            rows: widget.rows,
+          ),
         ],
       ),
     );
   }
 
   Widget _buildBox(BuildContext context, int i) {
-    int beat = i % rows;
-    int note = i ~/ rows;
+    int beat = i % widget.rows;
+    int note = i ~/ widget.rows;
     bool enable = _notes[beat][note];
     return Box(
       enable: enable,
       noteOn: enable && _playing && beat == _beat,
       onTap: () => setState(() => _toggle(beat, note)),
-      onPlay: () => _play(note + 1),
+      onPlay: () => widget.onPlayNote(note),
     );
   }
 
   void _toggle(int beat, int note) {
     _notes[beat][note] = !_notes[beat][note];
   }
-
-  _play(int note) async {
-    // int id = await audioEngine.createSoundObject(assetForNote(note));
-    // audioEngine.playSound(id);
-  }
 }
 
 class Bar extends StatelessWidget {
-  final double beat;
-
   const Bar({
     Key? key,
     required this.beat,
+    required this.rows,
   }) : super(key: key);
+
+  final double beat;
+  final int rows;
 
   @override
   Widget build(BuildContext context) {

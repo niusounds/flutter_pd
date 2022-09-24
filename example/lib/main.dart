@@ -17,7 +17,9 @@ class MyApp extends StatelessWidget {
         '/simple_sin': (_) => SimpleSin(),
         '/simple_sin_with_volume': (_) => SimpleSinWithVolume(),
         '/microphone_meter': (_) => MicrophoneMeter(),
-        '/fluttone': (_) => Fluttone(),
+        '/fluttone': (_) => FluttoneUi(
+              onPlayNote: (note) {},
+            ),
       },
     );
   }
