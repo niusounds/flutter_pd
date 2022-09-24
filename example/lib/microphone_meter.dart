@@ -10,11 +10,11 @@ class MicrophoneMeter extends StatefulWidget {
 
 class _MicrophoneMeterState extends State<MicrophoneMeter> {
   final _pd = FlutterPd();
-  PdFileHandle _pdFileHandle;
+  PdFileHandle? _pdFileHandle;
 
   final _assetPath = 'assets/microphone_level.pd';
 
-  Stream<FloatEvent> _pdEvent;
+  late Stream<FloatEvent> _pdEvent;
 
   @override
   void initState() {
@@ -58,7 +58,7 @@ class _MicrophoneMeterState extends State<MicrophoneMeter> {
           stream: _pdEvent,
           builder: (context, snapshot) {
             if (snapshot.hasData) {
-              final event = snapshot.data;
+              final event = snapshot.data!;
               return Text('Microphone level: ${event.value}db');
             } else if (snapshot.hasError) {
               return Text('Error: ${snapshot.error}');
