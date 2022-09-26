@@ -70,6 +70,13 @@ class MethodChannelFlutterPd extends FlutterPdPlatform {
   }
 
   @override
+  Future<void> sendBang(String receiverName) {
+    return methodChannel.invokeMethod('sendBang', {
+      'receiver': receiverName,
+    });
+  }
+
+  @override
   Stream<PdEvent> receive(String symbol) {
     return eventChannel
         .receiveBroadcastStream({

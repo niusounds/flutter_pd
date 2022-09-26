@@ -93,6 +93,13 @@ class PdImpl(private val context: Context) : Pd {
         }
     }
 
+    override fun sendBang(receiver: String) {
+        val error = PdBase.sendBang(receiver)
+        if (error != 0) {
+            throw PdException("send failed", "with error code $error")
+        }
+    }
+
     override fun addListener(symbol: String, listener: PdListener) {
         dispatcher.addListener(symbol, listener)
     }

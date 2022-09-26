@@ -19,7 +19,7 @@ public class SwiftFlutterPdPlugin: NSObject, FlutterPlugin, FlutterStreamHandler
 
   private let registrar: FlutterPluginRegistrar
   private var audioController: PdAudioController?
-    private var dispatcher: PdDispatcher?
+  private var dispatcher: PdDispatcher?
   private var fileHandles: [Int: UnsafeMutableRawPointer] = [:]
 
   public init(registrar: FlutterPluginRegistrar) {
@@ -93,6 +93,16 @@ public class SwiftFlutterPdPlugin: NSObject, FlutterPlugin, FlutterStreamHandler
       }
 
       PdBase.send(Float(value), toReceiver: receiver)
+      result(nil)
+    case "sendBang":
+      guard let args = call.arguments as? [String: Any?],
+        let receiver = args["receiver"] as? String
+      else {
+        result(nil)
+        return
+      }
+
+      PdBase.sendBang(toReceiver: receiver)
       result(nil)
     default:
       result(FlutterMethodNotImplemented)

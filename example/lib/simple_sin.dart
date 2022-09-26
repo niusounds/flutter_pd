@@ -3,7 +3,7 @@ import 'package:flutter_pd/flutter_pd.dart';
 
 class SimpleSin extends StatefulWidget {
   @override
-  _SimpleSinState createState() => _SimpleSinState();
+  State<SimpleSin> createState() => _SimpleSinState();
 }
 
 class _SimpleSinState extends State<SimpleSin> {

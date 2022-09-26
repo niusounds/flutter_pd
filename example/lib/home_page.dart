@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
@@ -28,6 +28,11 @@ class _HomePageState extends State<HomePage> {
             onTap: _open('/microphone_meter'),
             title: Text('Microphone meter'),
             subtitle: Text('Demonstrates how to receive value from Pd.'),
+          ),
+          ListTile(
+            onTap: _open('/fluttone'),
+            title: Text('Fluttone'),
+            subtitle: Text('Refined Flutter Contest app.'),
           ),
         ],
       ),

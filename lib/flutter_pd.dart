@@ -6,6 +6,8 @@ export 'pd_event.dart';
 export 'pd_file_handle.dart';
 
 class FlutterPd {
+  const FlutterPd();
+
   /// Request a permission to access to microphone.
   Future<bool> checkPermission() async {
     return FlutterPdPlatform.instance.checkPermission();
@@ -36,6 +38,10 @@ class FlutterPd {
 
   Future<void> send(String receiverName, double value) {
     return FlutterPdPlatform.instance.send(receiverName, value);
+  }
+
+  Future<void> sendBang(String receiverName) {
+    return FlutterPdPlatform.instance.sendBang(receiverName);
   }
 
   Stream<PdEvent> receive(String symbol) {

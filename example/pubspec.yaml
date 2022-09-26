@@ -8,20 +8,20 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  flutter_pd:
+    path: ../
   cupertino_icons: ^0.1.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-  flutter_pd:
-    path: ../
+  lints:
 
 flutter:
   uses-material-design: true
 
   assets:
+    - assets/fluttone.pd
     - assets/microphone_level.pd
     - assets/simple_sin.pd
     - assets/simple_sin_with_volume.pd

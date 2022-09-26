@@ -3,7 +3,7 @@ import 'package:flutter_pd/flutter_pd.dart';
 
 class SimpleSinWithVolume extends StatefulWidget {
   @override
-  _SimpleSinWithVolumeState createState() => _SimpleSinWithVolumeState();
+  State<SimpleSinWithVolume> createState() => _SimpleSinWithVolumeState();
 }
 
 class _SimpleSinWithVolumeState extends State<SimpleSinWithVolume> {

@@ -4,7 +4,6 @@ import com.niusounds.flutter_pd.impl.PdImpl
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
 import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
-import io.flutter.plugin.common.BinaryMessenger
 import io.flutter.plugin.common.EventChannel
 import io.flutter.plugin.common.MethodChannel
 
@@ -14,20 +13,18 @@ class FlutterPdPlugin : FlutterPlugin, ActivityAware {
 
     override fun onAttachedToEngine(flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
         val flutterPd = FlutterPd(
-            context = flutterPluginBinding.applicationContext,
-            assetPathResolver = flutterPluginBinding.asAssetPathResolver(),
+            flutterPluginBinding,
             pd = PdImpl(flutterPluginBinding.applicationContext)
         )
-        connect(flutterPluginBinding.binaryMessenger, flutterPd)
+        // Setup messaging path:
+        // MethodChannel & EventChannel -> DartCallHandler -> FlutterPd
+        DartCallHandler(flutterPd).also {
+            MethodChannel(flutterPluginBinding.binaryMessenger, "flutter_pd/method")
+                .setMethodCallHandler(it)
+            EventChannel(flutterPluginBinding.binaryMessenger, "flutter_pd/event")
+                .setStreamHandler(it)
+        }
         this.flutterPd = flutterPd
-    }
-
-    private fun connect(binaryMessenger: BinaryMessenger, flutterPd: FlutterPd) {
-        val handler = DartCallHandler(flutterPd)
-        MethodChannel(binaryMessenger, "flutter_pd/method")
-            .setMethodCallHandler(handler)
-        EventChannel(binaryMessenger, "flutter_pd/event")
-            .setStreamHandler(handler)
     }
 
     override fun onDetachedFromEngine(binding: FlutterPlugin.FlutterPluginBinding) {
