@@ -87,14 +87,14 @@ class PdImpl(private val context: Context) : Pd {
     }
 
     override fun send(receiver: String, value: Float) {
-        val error = PdBase.sendFloat(receiver, value)
-        if (error != 0) {
-            throw PdException("send failed", "with error code $error")
-        }
+        checkError(PdBase.sendFloat(receiver, value))
     }
 
     override fun sendBang(receiver: String) {
-        val error = PdBase.sendBang(receiver)
+        checkError(PdBase.sendBang(receiver))
+    }
+
+    private fun checkError(error: Int) {
         if (error != 0) {
             throw PdException("send failed", "with error code $error")
         }
